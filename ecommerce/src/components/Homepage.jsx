@@ -1,4 +1,3 @@
-import './header.css'
 import './Homepage.css'
 import {Header} from './header/Header'
 export function Homepage() {
