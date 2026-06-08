@@ -1,5 +1,4 @@
 import './Orders.css'
-import './header.css'
 import {Header} from './header/Header'
 export function Orders() {
     return (
@@ -54,7 +53,7 @@ export function Orders() {
                             </div>
 
                             <div class="product-actions">
-                                <a href="tracking.html">
+                                <a href="/tracking">
                                     <button class="track-package-button button-secondary">
                                         Track package
                                     </button>
@@ -82,7 +81,7 @@ export function Orders() {
                             </div>
 
                             <div class="product-actions">
-                                <a href="tracking.html">
+                                <a href="/tracking">
                                     <button class="track-package-button button-secondary">
                                         Track package
                                     </button>
@@ -133,7 +132,7 @@ export function Orders() {
                             </div>
 
                             <div class="product-actions">
-                                <a href="tracking.html">
+                                <a href="/tracking">
                                     <button class="track-package-button button-secondary">
                                         Track package
                                     </button>

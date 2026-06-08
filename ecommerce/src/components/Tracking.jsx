@@ -1,4 +1,4 @@
-import './header.css'
+//import './header.css'
 import './Tracking.css'
 import { Header } from './header/Header'
 export function Tracking() {
@@ -9,7 +9,7 @@ export function Tracking() {
 
             <div class="tracking-page">
                 <div class="order-tracking">
-                    <a class="back-to-orders-link link-primary" href="orders.html">
+                    <a class="back-to-orders-link link-primary" href="/orders">
                         View all orders
                     </a>
 
