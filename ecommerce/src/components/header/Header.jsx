@@ -1,5 +1,5 @@
 import './header.css'
-export function Header(){
+export function Header( {Cart}){
     return(
     <>
      <div className="header">

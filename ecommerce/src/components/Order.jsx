@@ -1,6 +1,6 @@
 import './Orders.css'
 import {Header} from './header/Header'
-export function Orders() {
+export function Orders( { Cart } ) {
     return (
         <>
             <title>Orders</title>
