@@ -1,6 +1,22 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import days from 'dayjs'
 import './Orders.css'
 import {Header} from './header/Header'
+
+
 export function Orders( { Cart } ) {
+
+    const [orders, setorders] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/orders?expand=products')
+            .then((res) => {
+                setorders(res.data);
+            });
+
+    }, []);
+
+
     return (
         <>
             <title>Orders</title>
