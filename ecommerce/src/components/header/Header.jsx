@@ -1,5 +1,10 @@
 import './header.css'
 export function Header( {Cart}){
+    let count=0;
+    Cart.forEach((itmes) => {
+        count+=itmes.quantity;
+    });
+
     return(
     <>
      <div className="header">
@@ -28,7 +33,7 @@ export function Header( {Cart}){
 
                     <a className="cart-link header-link" href="/checkout">
                         <img className="cart-icon" src="images/icons/cart-icon.png" />
-                        <div className="cart-quantity">3</div>
+                        <div className="cart-quantity">{ count }</div>
                         <div className="cart-text">Cart</div>
                     </a>
                 </div>
