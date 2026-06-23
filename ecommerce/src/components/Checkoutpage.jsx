@@ -1,7 +1,21 @@
+import axios from 'axios';
+import { useState , useEffect } from 'react';
 import './Checkout.css'
 import './checkout_header.css'
 
-export function Checkoutpage() {
+export function Checkoutpage( {Cart} ) {
+    const [delivery,setdelivery] = useState([]);
+
+    useEffect(()=>{
+        axios.get('http://localhost:3000/api/delivery-options?expands=estimatedDeliveryTime')
+    .then((response)=>{
+        setdelivery(response.data);
+    })
+
+    },[])
+
+    
+
     return (
         <>
             <div class="checkout-header">
@@ -29,25 +43,28 @@ export function Checkoutpage() {
 
                 <div class="checkout-grid">
                     <div class="order-summary">
-                        <div class="cart-item-container">
+                       {Cart.map((items)=>{
+                            return(
+                            <>
+                                 <div  key = {items.productId} class="cart-item-container">
                             <div class="delivery-date">
                                 Delivery date: Tuesday, June 21
                             </div>
 
                             <div class="cart-item-details-grid">
                                 <img class="product-image"
-                                    src="images/products/athletic-cotton-socks-6-pairs.jpg" />
+                                    src={items.product.image} />
 
                                 <div class="cart-item-details">
                                     <div class="product-name">
                                         Black and Gray Athletic Cotton Socks - 6 Pairs
                                     </div>
                                     <div class="product-price">
-                                        $10.90
+                                        ${(items.product.priceCents/100).toFixed(2)}
                                     </div>
                                     <div class="product-quantity">
                                         <span>
-                                            Quantity: <span class="quantity-label">2</span>
+                                            Quantity: <span class="quantity-label">{items.quantity}</span>
                                         </span>
                                         <span class="update-quantity-link link-primary">
                                             Update
@@ -104,8 +121,12 @@ export function Checkoutpage() {
                                 </div>
                             </div>
                         </div>
+                            </>
+                            )
+                       })}
 
-                        <div class="cart-item-container">
+
+                        {/* <div class="cart-item-container">
                             <div class="delivery-date">
                                 Delivery date: Wednesday, June 15
                             </div>
@@ -177,7 +198,7 @@ export function Checkoutpage() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div class="payment-summary">
