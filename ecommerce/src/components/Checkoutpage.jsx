@@ -1,20 +1,20 @@
 import axios from 'axios';
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Checkout.css'
 import './checkout_header.css'
 
-export function Checkoutpage( {Cart} ) {
-    const [delivery,setdelivery] = useState([]);
+export function Checkoutpage({ Cart }) {
+    const [delivery, setdelivery] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get('http://localhost:3000/api/delivery-options?expands=estimatedDeliveryTime')
-    .then((response)=>{
-        setdelivery(response.data);
-    })
+            .then((response) => {
+                setdelivery(response.data);
+            })
 
-    },[])
+    }, [])
 
-    
+
 
     return (
         <>
@@ -43,162 +43,89 @@ export function Checkoutpage( {Cart} ) {
 
                 <div class="checkout-grid">
                     <div class="order-summary">
-                       {Cart.map((items)=>{
-                            return(
-                            <>
-                                 <div  key = {items.productId} class="cart-item-container">
-                            <div class="delivery-date">
-                                Delivery date: Tuesday, June 21
-                            </div>
+                        {Cart.map((items) => {
+                            return (
+                                <>
+                                    <div key={items.productId} class="cart-item-container">
+                                        <div class="delivery-date">
+                                            Delivery date: Tuesday, June 21
+                                        </div>
 
-                            <div class="cart-item-details-grid">
-                                <img class="product-image"
-                                    src={items.product.image} />
+                                        <div class="cart-item-details-grid">
+                                            <img class="product-image"
+                                                src={items.product.image} />
 
-                                <div class="cart-item-details">
-                                    <div class="product-name">
-                                        Black and Gray Athletic Cotton Socks - 6 Pairs
-                                    </div>
-                                    <div class="product-price">
-                                        ${(items.product.priceCents/100).toFixed(2)}
-                                    </div>
-                                    <div class="product-quantity">
-                                        <span>
-                                            Quantity: <span class="quantity-label">{items.quantity}</span>
-                                        </span>
-                                        <span class="update-quantity-link link-primary">
-                                            Update
-                                        </span>
-                                        <span class="delete-quantity-link link-primary">
-                                            Delete
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="delivery-options">
-                                    <div class="delivery-options-title">
-                                        Choose a delivery option:
-                                    </div>
-                                    <div class="delivery-option">
-                                        <input type="radio" checked
-                                            class="delivery-option-input"
-                                            name="delivery-option-1" />
-                                        <div>
-                                            <div class="delivery-option-date">
-                                                Tuesday, June 21
+                                            <div class="cart-item-details">
+                                                <div class="product-name">
+                                                    {items.product.name}
+                                                </div>
+                                                <div class="product-price">
+                                                    ${(items.product.priceCents / 100).toFixed(2)}
+                                                </div>
+                                                <div class="product-quantity">
+                                                    <span>
+                                                        Quantity: <span class="quantity-label">{items.quantity}</span>
+                                                    </span>
+                                                    <span class="update-quantity-link link-primary">
+                                                        Update
+                                                    </span>
+                                                    <span class="delete-quantity-link link-primary">
+                                                        Delete
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="delivery-option-price">
-                                                FREE Shipping
+
+                                            <div class="delivery-options">
+                                                <div class="delivery-options-title">
+                                                    Choose a delivery option:
+                                                </div>
+                                                <div class="delivery-option">
+                                                    <input type="radio" checked
+                                                        class="delivery-option-input"
+                                                        name="delivery-option-1" />
+                                                    <div>
+                                                        <div class="delivery-option-date">
+                                                            Tuesday, June 21
+                                                        </div>
+                                                        <div class="delivery-option-price">
+                                                            FREE Shipping
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="delivery-option">
+                                                    <input type="radio"
+                                                        class="delivery-option-input"
+                                                        name="delivery-option-1" />
+                                                    <div>
+                                                        <div class="delivery-option-date">
+                                                            Wednesday, June 15
+                                                        </div>
+                                                        <div class="delivery-option-price">
+                                                            $4.99 - Shipping
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="delivery-option">
+                                                    <input type="radio"
+                                                        class="delivery-option-input"
+                                                        name="delivery-option-1" />
+                                                    <div>
+                                                        <div class="delivery-option-date">
+                                                            Monday, June 13
+                                                        </div>
+                                                        <div class="delivery-option-price">
+                                                            $9.99 - Shipping
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="delivery-option">
-                                        <input type="radio"
-                                            class="delivery-option-input"
-                                            name="delivery-option-1" />
-                                        <div>
-                                            <div class="delivery-option-date">
-                                                Wednesday, June 15
-                                            </div>
-                                            <div class="delivery-option-price">
-                                                $4.99 - Shipping
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="delivery-option">
-                                        <input type="radio"
-                                            class="delivery-option-input"
-                                            name="delivery-option-1" />
-                                        <div>
-                                            <div class="delivery-option-date">
-                                                Monday, June 13
-                                            </div>
-                                            <div class="delivery-option-price">
-                                                $9.99 - Shipping
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            </>
+                                </>
                             )
-                       })}
+                        })}
 
 
-                        {/* <div class="cart-item-container">
-                            <div class="delivery-date">
-                                Delivery date: Wednesday, June 15
-                            </div>
-
-                            <div class="cart-item-details-grid">
-                                <img class="product-image"
-                                    src="images/products/intermediate-composite-basketball.jpg" />
-
-                                <div class="cart-item-details">
-                                    <div class="product-name">
-                                        Intermediate Size Basketball
-                                    </div>
-                                    <div class="product-price">
-                                        $20.95
-                                    </div>
-                                    <div class="product-quantity">
-                                        <span>
-                                            Quantity: <span class="quantity-label">1</span>
-                                        </span>
-                                        <span class="update-quantity-link link-primary">
-                                            Update
-                                        </span>
-                                        <span class="delete-quantity-link link-primary">
-                                            Delete
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="delivery-options">
-                                    <div class="delivery-options-title">
-                                        Choose a delivery option:
-                                    </div>
-
-                                    <div class="delivery-option">
-                                        <input type="radio" class="delivery-option-input"
-                                            name="delivery-option-2" />
-                                        <div>
-                                            <div class="delivery-option-date">
-                                                Tuesday, June 21
-                                            </div>
-                                            <div class="delivery-option-price">
-                                                FREE Shipping
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="delivery-option">
-                                        <input type="radio" checked class="delivery-option-input"
-                                            name="delivery-option-2" />
-                                        <div>
-                                            <div class="delivery-option-date">
-                                                Wednesday, June 15
-                                            </div>
-                                            <div class="delivery-option-price">
-                                                $4.99 - Shipping
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="delivery-option">
-                                        <input type="radio" class="delivery-option-input"
-                                            name="delivery-option-2" />
-                                        <div>
-                                            <div class="delivery-option-date">
-                                                Monday, June 13
-                                            </div>
-                                            <div class="delivery-option-price">
-                                                $9.99 - Shipping
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
 
                     <div class="payment-summary">
