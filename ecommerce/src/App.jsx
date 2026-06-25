@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import {Homepage} from './components/home/Homepage'
 import {Orders} from './components/Order'
 import {Tracking} from './components/Tracking'
-import {Checkoutpage} from './components/Checkoutpage'
+import {Checkoutpage} from './components/checkout/Checkoutpage'
 import './App.css'
 
 function App() {
