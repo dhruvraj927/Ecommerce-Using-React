@@ -1,29 +1,8 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react'
-import './Homepage.css'
-import { Header } from './header/Header'
-
-export function Homepage({ Cart }) {
-
-    const [Products, setProducts] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:3000/api/products')
-            .then((res) => {
-                setProducts(res.data);
-            })
-    }, [])
-
-    return (
+export function Product({Products}){
+    return(
+        
         <>
-            <title>HOME PAGE</title>
-
-            <Header Cart={Cart} />
-
-            <div className="home-page">
-                <div className="products-grid">
-
-                    {Products.map((prdt) => {
+         {Products.map((prdt) => {
                         return (
                             <div key={prdt.id} className="product-container">
                                 <div className="product-image-container">
@@ -75,10 +54,6 @@ export function Homepage({ Cart }) {
                             </div>
                         )
                     })}
-
-
-                </div>
-            </div>
         </>
-    );
+    )
 }
