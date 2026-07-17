@@ -1,6 +1,9 @@
-
+import { useState } from 'react';
+import axios from "axios";
 
 export function Productg({prdt}){
+
+    const [quantity , setquantity] = useState(1);
 
     return(
         <>
@@ -27,7 +30,10 @@ export function Productg({prdt}){
                                 </div>
 
                                 <div className="product-quantity-container">
-                                    <select>
+                                    <select value = {quantity} onChange={(event) =>{
+                                        const q = Number(event.target.value);
+                                    setquantity(q); 
+                                     }}>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -48,7 +54,16 @@ export function Productg({prdt}){
                                     Added
                                 </div>
 
-                                <button className="add-to-cart-button button-primary">
+                                <button className="add-to-cart-button button-primary"
+                                onClick={async ()=>{
+                                    await axios.post('http://localhost:3000/api/cart-items' ,{
+                                        productId:prdt.id,
+                                        quantity:quantity
+                                    });
+                                     await loadcart();
+                                }}
+                                
+                                >
                                     Add to Cart
                                 </button>
                             </div>
