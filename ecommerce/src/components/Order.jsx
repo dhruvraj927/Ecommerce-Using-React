@@ -21,7 +21,7 @@ export function Orders( { Cart } ) {
         <>
             <title>Orders</title>
 
-            <Header/>
+            <Header Cart = {Cart}/>
 
             <div class="orders-page">
                 <div class="page-title">Your Orders</div>

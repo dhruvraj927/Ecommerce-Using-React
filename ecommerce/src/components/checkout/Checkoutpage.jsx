@@ -3,8 +3,12 @@ import dayjs from 'dayjs'
 import { useState, useEffect } from 'react';
 import './Checkout.css'
 import './checkout_header.css'
+import { Pay } from './payment/Pay'
 
-export function Checkoutpage({ Cart }) {
+
+export function Checkoutpage({ Cart , loadcart}) {
+
+
     const [delivery, setdelivery] = useState([]);
     const [payment, setpayment] = useState(null);
 
@@ -29,31 +33,31 @@ export function Checkoutpage({ Cart }) {
 
     return (
         <>
-            <div class="checkout-header">
-                <div class="header-content">
-                    <div class="checkout-header-left-section">
+            <div className="checkout-header">
+                <div className="header-content">
+                    <div className="checkout-header-left-section">
                         <a href="/">
-                            <img class="logo" src="images/logo.png" />
-                            <img class="mobile-logo" src="images/mobile-logo.png" />
+                            <img className="logo" src="images/logo.png" />
+                            <img className="mobile-logo" src="images/mobile-logo.png" />
                         </a>
                     </div>
 
-                    <div class="checkout-header-middle-section">
-                        Checkout (<a class="return-to-home-link"
+                    <div className="checkout-header-middle-section">
+                        Checkout (<a className="return-to-home-link"
                             href="/">{count} items</a>)
                     </div>
 
-                    <div class="checkout-header-right-section">
+                    <div className="checkout-header-right-section">
                         <img src="images/icons/checkout-lock-icon.png" />
                     </div>
                 </div>
             </div>
 
-            <div class="checkout-page">
-                <div class="page-title">Review your order</div>
+            <div className="checkout-page">
+                <div className="page-title">Review your order</div>
 
-                <div class="checkout-grid">
-                    <div class="order-summary">
+                <div className="checkout-grid">
+                    <div className="order-summary">
                         {delivery.length > 0 && Cart.map((items) => {
 
                             const selectDeliveyoption = delivery.find((deliveryOption) => {
@@ -61,37 +65,37 @@ export function Checkoutpage({ Cart }) {
                             })
                             return (
                                 <>
-                                    <div key={items.productId} class="cart-item-container">
-                                        <div class="delivery-date">
+                                    <div key={items.productId} className="cart-item-container">
+                                        <div className="delivery-date">
                                             Delivery date: {dayjs(selectDeliveyoption.estimatedDeliveryTimeMs).format('dddd , MMMM , D')}
                                         </div>
 
-                                        <div class="cart-item-details-grid">
-                                            <img class="product-image"
+                                        <div className="cart-item-details-grid">
+                                            <img className="product-image"
                                                 src={items.product.image} />
 
-                                            <div class="cart-item-details">
-                                                <div class="product-name">
+                                            <div className="cart-item-details">
+                                                <div className="product-name">
                                                     {items.product.name}
                                                 </div>
-                                                <div class="product-price">
+                                                <div className="product-price">
                                                     ${(items.product.priceCents / 100).toFixed(2)}
                                                 </div>
-                                                <div class="product-quantity">
+                                                <div className="product-quantity">
                                                     <span>
-                                                        Quantity: <span class="quantity-label">{items.quantity}</span>
+                                                        Quantity: <span className="quantity-label">{items.quantity}</span>
                                                     </span>
-                                                    <span class="update-quantity-link link-primary">
+                                                    <span className="update-quantity-link link-primary">
                                                         Update
                                                     </span>
-                                                    <span class="delete-quantity-link link-primary">
+                                                    <span className="delete-quantity-link link-primary">
                                                         Delete
                                                     </span>
                                                 </div>
                                             </div>
 
-                                            <div class="delivery-options">
-                                                <div class="delivery-options-title">
+                                            <div className="delivery-options">
+                                                <div className="delivery-options-title">
                                                     Choose a delivery option:
                                                 </div>
                                                 {delivery.map((del) => {
@@ -100,16 +104,16 @@ export function Checkoutpage({ Cart }) {
                                                         priceString = `$${(del.priceCents / 100).toFixed(2)} - Shipping `;
                                                     }
                                                     return (
-                                                        <div class="delivery-option">
+                                                        <div className="delivery-option">
                                                             <input type="radio" 
                                                                  //checked = {del.id==items.deliveryOptionId}
-                                                                class="delivery-option-input"
+                                                                className="delivery-option-input"
                                                                 name={`delivery-option-${items.productId}` }/>
                                                             <div>
-                                                                <div class="delivery-option-date">
+                                                                <div className="delivery-option-date">
                                                                      {dayjs(delivery.estimatedDeliveryTimeMs).format('dddd , MMMM , D')}
                                                                 </div>
-                                                                <div class="delivery-option-price">
+                                                                <div className="delivery-option-price">
                                                                     {/* FREE Shipping */}
                                                                     {priceString}
                                                                 </div>
@@ -129,40 +133,10 @@ export function Checkoutpage({ Cart }) {
 
                     </div>
 
-                    <div class="payment-summary">
-                        <div class="payment-summary-title">
-                            Payment Summary
-                        </div>
 
-                        <div class="payment-summary-row">
-                            <div>Items ({count}):</div>
-                            <div class="payment-summary-money">$42.75</div>
-                        </div>
+                    <Pay payment={payment} loadcart={loadcart} />
 
-                        <div class="payment-summary-row">
-                            <div>Shipping &amp; handling:</div>
-                            <div class="payment-summary-money">$4.99</div>
-                        </div>
 
-                        <div class="payment-summary-row subtotal-row">
-                            <div>Total before tax:</div>
-                            <div class="payment-summary-money">$47.74</div>
-                        </div>
-
-                        <div class="payment-summary-row">
-                            <div>Estimated tax (10%):</div>
-                            <div class="payment-summary-money">$4.77</div>
-                        </div>
-
-                        <div class="payment-summary-row total-row">
-                            <div>Order total:</div>
-                            <div class="payment-summary-money">$52.51</div>
-                        </div>
-
-                        <button class="place-order-button button-primary">
-                            Place your order
-                        </button>
-                    </div>
                 </div>
             </div>
         </>
